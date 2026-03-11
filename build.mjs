@@ -59,7 +59,7 @@ function slugToFilename(slug) {
 function getDefaultMeta() {
   return {
     siteTitle: "ארזים",
-    siteTagline: "הופכים את הקשה מאוד לבלתי אפשרי",
+    siteTagline: "הופכים את הבלתי אפשרי לקשה מאוד",
   };
 }
 
@@ -127,14 +127,14 @@ function buildHtml({ meta, navItems, bodyClass, contentHtml }) {
         </nav>
         <button class="theme-toggle" type="button" aria-label="Toggle color theme">
           <span class="theme-toggle-icon theme-toggle-icon-sun">☀</span>
-          <span class="theme-toggle-icon theme-toggle-icon-moon">🌙</span>
+          <span class="theme-toggle-icon theme-toggle-icon-moon">⏾</span>
         </button>
       </header>
       <main class="site-main">
         ${contentHtml}
       </main>
       <footer class="site-footer">
-        <p>© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.</p>
+        <p>${siteTitle} ${new Date().getFullYear()} ©. כל הזכויות שמורות.</p>
       </footer>
     </div>
     <script>

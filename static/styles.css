@@ -163,7 +163,11 @@ body {
 html[data-theme="light"] .theme-toggle {
   background: #ecfdf5;
   color: #166534;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+}
+
+html[data-theme="dark"] .theme-toggle {
+  background: #1e293b;
+  color: #f8fafc;
 }
 
 .theme-toggle-icon {
@@ -330,7 +334,7 @@ html[data-theme="light"] .page-body code {
   border-radius: 12px;
   overflow: hidden;
   margin: -0.5rem -0.8rem 1.8rem;
-  min-height: 180px;
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;

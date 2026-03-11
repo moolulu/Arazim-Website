@@ -6,7 +6,7 @@ layout: wide
 navLabel: המסלול
 navOrder: 30
 heroTitle: המסלול
-heroSubtitle: מה לומדים, מתי, ואיך נראה המסלול לאורך הדרך.
+heroSubtitle: ההכשרה הטובה ביותר לטובים ביותר
 heroImage: /images/track-hero.jpg
 ---
 
