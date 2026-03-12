@@ -95,7 +95,11 @@ function buildHtml({ meta, navItems, bodyClass, contentHtml }) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${pageTitle}</title>
     <meta name="description" content="${safeDescription}" />
+
+    <link rel="icon" type="image/x-icon" href="./images/favicon.png">
+
     <link rel="stylesheet" href="./styles.css" />
+
     <script>
       (function() {
         try {
@@ -110,6 +114,7 @@ function buildHtml({ meta, navItems, bodyClass, contentHtml }) {
       })();
     </script>
   </head>
+
   <body class="${layoutClass} ${bodyClass || ""}">
     <div class="page-shell">
       <header class="site-header">
