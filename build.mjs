@@ -114,16 +114,16 @@ function buildHtml({ meta, navItems, bodyClass, contentHtml }) {
     <div class="page-shell">
       <header class="site-header">
         <div class="site-branding">
-          <a href="/" class="site-logo-link">
+          <a href="." class="site-logo-link">
             <img src="./images/logo.png" alt="ארזים" class="site-logo" />
           </a>
           <div class="site-text">
-            <a href="/" class="site-title">${siteTitle}</a>
+            <a href="." class="site-title">${siteTitle}</a>
             <p class="site-tagline">${siteTagline}</p>
           </div>
         </div>
         <nav class="site-nav">
-          <a href="/" class="nav-link">התוכנית</a>
+          <a href="." class="nav-link">התוכנית</a>
           ${navLinks}
         </nav>
         <button class="theme-toggle" type="button" aria-label="Toggle color theme">
