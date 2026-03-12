@@ -1,14 +1,12 @@
 /* Color system */
 :root {
   color-scheme: light dark;
-  /* default (auto / dark) palette: dark grey + green */
   --bg: #050708;
   --bg-elevated: #111827;
   --bg-soft: #020617;
   --border-subtle: rgba(75, 85, 99, 0.7);
   --text: #e5e7eb;
   --text-soft: #9ca3af;
-  /* darker, but warm, “alive” green */
   --accent: #4caf1b;
   --accent-soft: rgba(76, 175, 27, 0.18);
   --accent-strong: #3a8a14;
@@ -20,14 +18,12 @@
 
 html[data-theme="light"] {
   color-scheme: light;
-  /* light palette: light grey + green */
   --bg: #e5e7eb;
   --bg-elevated: #ffffff;
   --bg-soft: #d1d5db;
   --border-subtle: rgba(148, 163, 184, 0.7);
   --text: #111827;
   --text-soft: #4b5563;
-  /* brighter, more yellowish “alive” green */
   --accent: #7fd322;
   --accent-soft: rgba(127, 211, 34, 0.16);
   --accent-strong: #5ea319;
@@ -65,8 +61,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 0.9rem 2rem;
-  /* warm, lively green header */
+  padding: 0.2rem 2rem;
   background: linear-gradient(to bottom, #0f5f2b, #06401d);
   color: #e5e7eb;
   border-bottom: 2px solid #16a34a;
@@ -85,8 +80,8 @@ body {
 }
 
 .site-logo {
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 
