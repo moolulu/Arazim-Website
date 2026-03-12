@@ -115,7 +115,7 @@ function buildHtml({ meta, navItems, bodyClass, contentHtml }) {
       <header class="site-header">
         <div class="site-branding">
           <a href="${slugToFilename("index")}" class="site-logo-link">
-            <img src="/images/logo.png" alt="ארזים" class="site-logo" />
+            <img src="./images/logo.png" alt="ארזים" class="site-logo" />
           </a>
           <div class="site-text">
             <a href="${slugToFilename("index")}" class="site-title">${siteTitle}</a>
