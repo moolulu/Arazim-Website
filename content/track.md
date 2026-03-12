@@ -7,7 +7,7 @@ navLabel: המסלול
 navOrder: 30
 heroTitle: המסלול
 heroSubtitle: ההכשרה הטובה ביותר לטובים ביותר
-heroImage: /images/track-hero.jpg
+heroImage: ./images/track-hero.jpg
 ---
 
 ## סדנת הכנה לאקדמיה (קיץ 0)

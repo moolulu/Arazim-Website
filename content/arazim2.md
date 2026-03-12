@@ -7,7 +7,7 @@ navLabel: ארזים 2
 navOrder: 40
 heroTitle: ארזים 2
 #heroSubtitle: תוכנית ההמשך לבוגרי ארזים – מה מחכה לכם בשלב הבא.
-heroImage: /images/arazim2-hero.jpg
+heroImage: ./images/arazim2-hero.jpg
 ---
 
 ארזים 2 היא תוכנית בה לומדים תואר שני במתמטיקה בשנה אחת בלבד.

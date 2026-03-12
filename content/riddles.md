@@ -7,7 +7,7 @@ navLabel: חידות
 navOrder: 50
 heroTitle: חידות
 heroSubtitle: מקום אחד לכל החידות והאתגרים של ארזים.
-heroImage: /images/riddles-hero.jpg
+heroImage: ./images/riddles-hero.jpg
 ---
 
 כאן תוכלו להוסיף חידות ותרגילים – מתמטיים, לוגיים, ותכנותיים – עבור המועמדים והחניכים.

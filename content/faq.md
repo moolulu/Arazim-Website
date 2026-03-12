@@ -7,7 +7,7 @@ navLabel: שאלות ותשובות
 navOrder: 60
 heroTitle: שאלות ותשובות
 heroSubtitle: כאן מרוכזות התשובות לשאלות שחוזרות שוב ושוב.
-heroImage: /images/faq-hero.jpg
+heroImage: ./images/faq-hero.jpg
 ---
 
 כאן תוכלו לרשום שאלות נפוצות ותשובות קצרות וברורות עבור מועמדים, חניכים והורים.

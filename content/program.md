@@ -7,7 +7,7 @@ navLabel: התוכנית
 navOrder: 10
 heroTitle: התוכנית
 heroSubtitle: כל מה שרציתם לדעת על תוכנית ארזים במסלול אחד מרוכז.
-heroImage: /images/program-hero.jpg
+heroImage: ./images/program-hero.jpg
 ---
 
 כאן תוכלו לכתוב בהמשך את הטקסט המלא על התוכנית:
