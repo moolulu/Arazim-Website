@@ -218,9 +218,8 @@ async function build() {
 
   marked.setOptions({
     gfm: true,
-    breaks: false,
+    breaks: true,
     headerIds: true,
-    mangle: false,
   });
 
   const navItems = pages.map((p) => ({
