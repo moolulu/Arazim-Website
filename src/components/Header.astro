@@ -2,12 +2,13 @@
 import { sitePages } from '../config.js';
 import { Image } from 'astro:assets';
 
-import logoImage from '../assets/logo.png';
+const baseUrl = import.meta.env.BASE_URL;
+const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo.png';
 ---
 
 <header class="site-header">
   <a href="/" class="brand">
-    <img src="/logo.png" alt="לוגו ארזים" class="site-logo" width="2034" height="2034"/>
+    <img src={logoPath} alt="לוגו ארזים" class="site-logo" width="2034" height="2034"/>
     <div class="logo-group">
       <h1>ארזים</h1>
       <span class="motto">הופכים את הבלתי אפשרי לקשה מאוד</span>

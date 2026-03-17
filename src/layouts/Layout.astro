@@ -4,10 +4,12 @@ import Station from '../components/Station.astro';
 import HeroStation from '../components/HeroStation.astro';
 import AxesStation from '../components/AxesStation.astro';
 
-// 1. Import the getImage function from Astro
 import { getImage } from 'astro:assets';
 
 const { backgroundImage, stations } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
+const faviconPath = baseUrl.endsWith('/') ? baseUrl + 'favicon.png' : baseUrl + '/favicon.png';
 
 // 2. Intercept and optimize the massive background image
 const optimizedBg = await getImage({
@@ -15,6 +17,8 @@ const optimizedBg = await getImage({
   format: 'webp', // Converts to a fast, modern format
   width: 1920,    // Caps the maximum width to 1920px
 });
+
+const bgStyle = `background-image: url('${optimizedBg.src}')`;
 
 // Map the 'type' string from your data to the actual component
 const componentMap = {
@@ -30,7 +34,7 @@ const componentMap = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ארזים</title>
     
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={faviconPath} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +48,7 @@ const componentMap = {
     </div>
 
     <main class="scroller" id="scroller">
-      <div class="scroll-track" style={`background-image: url('${optimizedBg.src}')`}>
+      <div class="scroll-track" style={bgStyle}>
       
         {stations.map((station) => {
           // Resolve the component, defaulting to standard 'Station' if type is missing or unmatched
