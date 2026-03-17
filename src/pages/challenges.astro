@@ -1,0 +1,18 @@
+---
+import StationPage from '../layouts/Layout.astro';
+
+import backgroundImg from '../assets/images/flowing paint.jpg';
+
+const stations = [
+  {
+    type: "hero",
+    title: "אתגרים",
+    text: "חידות בנושאים מגוונים שארזים עוסקים בהם",
+  },
+];
+---
+
+<StationPage 
+  backgroundImage={backgroundImg}
+  stations={stations} 
+/>

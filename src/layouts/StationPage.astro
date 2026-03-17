@@ -1,0 +1,102 @@
+---
+import Header from '../components/Header.astro';
+import Station from '../components/Station.astro';
+
+const { backgroundImage, stations } = Astro.props;
+---
+
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ארזים</title>
+    
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <Header />
+
+    <div class="progress-container">
+      <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <main class="scroller" id="scroller">
+      <div class="scroll-track" style={`background-image: url('${backgroundImage}')`}>
+        {stations.map((station) => (
+          <Station data={station} />
+        ))}
+      </div>
+    </main>
+
+    <style>
+      :global(body, html) {
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+        font-family: 'Assistant', system-ui, -apple-system, sans-serif;
+      }
+
+      /* The Scroll Snap Container */
+      .scroller {
+        height: 100dvh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        position: relative;
+        scroll-behavior: smooth;
+      }
+
+      /* The Scrolling Background Track */
+      .scroll-track {
+        width: 100%;
+        background-size: cover;
+        background-position: top center;
+        background-repeat: no-repeat;
+        /* Darkens the image elegantly so text pops */
+        background-color: rgba(0, 0, 0, 0.4);
+        background-blend-mode: multiply; 
+      }
+
+      /* Progress Spine UI */
+      .progress-container {
+        position: fixed;
+        right: 40px; /* Right side for Hebrew */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 50vh;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: 100;
+      }
+
+      .progress-bar {
+        width: 100%;
+        background: #fff;
+        height: 0%; 
+        transition: height 0.1s ease-out;
+      }
+
+      @media (max-width: 768px) {
+        .progress-container {
+          right: 15px;
+        }
+      }
+    </style>
+
+    <script>
+      const scroller = document.getElementById('scroller');
+      const progressBar = document.getElementById('myBar');
+
+      if (scroller && progressBar) {
+        scroller.addEventListener('scroll', () => {
+          const scrollHeight = scroller.scrollHeight - scroller.clientHeight;
+          const scrolled = (scroller.scrollTop / scrollHeight) * 100;
+          progressBar.style.height = scrolled + "%";
+        });
+      }
+    </script>
+  </body>
+</html>
