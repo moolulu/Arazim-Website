@@ -3,11 +3,22 @@ import { sitePages } from '../config.js';
 import { Image } from 'astro:assets';
 
 const baseUrl = import.meta.env.BASE_URL;
-const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo.png';
+
+// Safely remove the trailing slash for building paths
+const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+// Logo path fix
+const logoPath = cleanBaseUrl + '/logo.png';
+
+// Helper function to perfectly format navigation links
+const getNavLink = (path) => {
+  if (path === '/') return baseUrl; // If it's the home page, just use the base URL
+  return cleanBaseUrl + (path.startsWith('/') ? path : '/' + path);
+};
 ---
 
 <header class="site-header">
-  <a href="/" class="brand">
+  <a href={baseUrl} class="brand">
     <img src={logoPath} alt="לוגו ארזים" class="site-logo" width="2034" height="2034"/>
     <div class="logo-group">
       <h1>ארזים</h1>
@@ -17,7 +28,7 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
 
   <nav class="desktop-nav">
     {sitePages.map(page => (
-      <a href={page.path}>{page.title}</a>
+      <a href={getNavLink(page.path)}>{page.title}</a>
     ))}
   </nav>
 
@@ -30,7 +41,7 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
   </div>
   <nav class="mobile-nav-links">
     {sitePages.map(page => (
-      <a href={page.path} class="mobile-link">{page.title}</a>
+      <a href={getNavLink(page.path)} class="mobile-link">{page.title}</a>
     ))}
   </nav>
 </div>
@@ -47,7 +58,7 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
     align-items: flex-start;
     /* Changed padding to move it closer to the right edge */
     /* top: 2rem, right: 1.5rem, bottom: 2rem, left: 3rem */
-    padding: 2rem 1.5rem 2rem 3rem; 
+    padding: 2rem 1.5rem 2rem 3rem;
     box-sizing: border-box;
     z-index: 1000;
     color: white;
@@ -70,9 +81,11 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
   }
 
   .logo-group h1 { margin: 0; font-size: 1.8rem; font-weight: 800; }
-  .motto { font-size: 1rem; opacity: 0.8; }
+  .motto { font-size: 1rem;
+    opacity: 0.8; }
 
-  .desktop-nav { display: flex; gap: 2.5rem; align-items: center; }
+  .desktop-nav { display: flex; gap: 2.5rem; align-items: center;
+  }
   .desktop-nav a {
     color: white;
     text-decoration: none;
@@ -149,12 +162,15 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
 
   /* --- Mobile Layout Rules --- */
   @media (max-width: 768px) {
-    .site-header { padding: 1.5rem; }
+    .site-header { padding: 1.5rem;
+    }
     .desktop-nav { display: none; } 
-    .mobile-menu-btn { display: block; } 
+    .mobile-menu-btn { display: block;
+    } 
     
     /* Make the logo slightly smaller on phones so it fits nicely */
-    .site-logo { height: 40px; }
+    .site-logo { height: 40px;
+    }
   }
 </style>
 
@@ -173,7 +189,7 @@ const logoPath = baseUrl.endsWith('/') ? baseUrl + 'logo.png' : baseUrl + '/logo
       closeBtn.addEventListener('click', () => {
         overlay.classList.remove('is-open');
       });
-      
+   
       mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
           overlay.classList.remove('is-open');
