@@ -1,0 +1,32 @@
+---
+import StationPage from '../layouts/Layout.astro';
+
+import backgroundImg from '../assets/images/parrot.jpg';
+
+const stations = [
+  {
+    type: "hero",
+    title: "האנשים",
+    text: "חידות בנושאים מגוונים שארזים עוסקים בהם",
+  },
+  {
+  type: "quotes",
+  align: "center",
+  title: "מפי הבוגרים",
+  quotes: [
+    { text: "בוא נעשה ע\"ע", author: "אדם צהוב" },
+    { text: "מיליםמיליםמיליםמיליםמיליםמיליםמיליםמילים\
+    מיליםמיליםמיליםמיליםמיליםמיליםמילים\
+    מיליםמיליםמיליםמיליםמיליםמיליםמילים\
+    מיליםמיליםמיליםמיליםמיליםמיליםמילים\
+    מיליםמיליםמיליםמיליםמיליםמיליםמילים", author: "בוגר דברן במיוחד" },
+    { text: "🥀 וכו'", author: "בוגר אנונימי" }
+  ]
+}
+];
+---
+
+<StationPage 
+  backgroundImage={backgroundImg}
+  stations={stations} 
+/>

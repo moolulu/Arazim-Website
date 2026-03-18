@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Station from '../components/Station.astro';
 import HeroStation from '../components/HeroStation.astro';
 import AxesStation from '../components/AxesStation.astro';
+import QuotesStation from '../components/QuotesStation.astro';
 
 import { getImage } from 'astro:assets';
 
@@ -24,7 +25,8 @@ const bgStyle = `background-image: url('${optimizedBg.src}')`;
 const componentMap = {
   standard: Station,
   hero: HeroStation,
-  Axes: AxesStation,
+  axes: AxesStation,
+  quotes: QuotesStation,
 };
 ---
 

@@ -15,6 +15,7 @@ const { data } = Astro.props;
         width="calc(100% - 6px)" 
         height="calc(100% - 6px)" 
         rx="32" 
+        pathLength="100" 
       />
     </svg>
 
@@ -119,19 +120,33 @@ const { data } = Astro.props;
     fill: transparent;
     stroke: rgba(255, 255, 255, 0.9);
     stroke-width: 5px; 
-    stroke-dasharray: 3000; 
-    stroke-dashoffset: 3000; 
+    
+    /* Since pathLength is 100, we work in percentages from 0 to 100 */
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
   }
 
   .hero-station.is-locked .border-rect {
-    animation: formAndUntangle 14s ease-in-out infinite;
+    /* 12s loop feels very organic */
+    animation: caterpillarChase 12s ease-in-out infinite;
   }
 
-  @keyframes formAndUntangle {
-    0% { stroke-dashoffset: 3000; }      
-    48% { stroke-dashoffset: 0; }        
-    52% { stroke-dashoffset: 0; }        
-    100% { stroke-dashoffset: -3000; }   
+  @keyframes caterpillarChase {
+    0% {
+      /* Start empty at the top */
+      stroke-dasharray: 0 100;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      /* Head sprinted ahead, tail followed slowly. Circuit is full. */
+      stroke-dasharray: 100 0;
+      stroke-dashoffset: -50; 
+    }
+    100% {
+      /* Tail sprints to catch the head. Shrunk back to zero. */
+      stroke-dasharray: 0 100;
+      stroke-dashoffset: -200; 
+    }
   }
 
   @media (max-width: 768px) {
