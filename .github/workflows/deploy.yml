@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 #v6 available
+        uses: actions/checkout@v6 
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4 #v6 available
+        uses: actions/setup-node@v6 
         with:
-          node-version: '22' #24 available
+          node-version: '24' 
           cache: 'npm'
 
       - name: Install dependencies
@@ -38,16 +38,16 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3 #v4 available
+        uses: actions/upload-pages-artifact@v4 
         with:
-          path: './dist' # Astro's default output folder
+          path: './dist' 
 
   # 2. THE DEPLOY JOB: Grabs the 'dist' folder and puts it on the web
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build # Waits for the build job to finish successfully
+    needs: build 
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
