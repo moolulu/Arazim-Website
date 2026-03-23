@@ -3,6 +3,8 @@ import StationPage from '../layouts/Layout.astro';
 
 import backgroundImg from '../assets/images/flowing paint.jpg';
 
+const pageTitle = "אתגרים";
+
 const stations = [
   {
     type: "hero",
@@ -22,6 +24,7 @@ const stations = [
 ---
 
 <StationPage 
+  title={pageTitle}
   backgroundImage={backgroundImg}
   stations={stations} 
 />

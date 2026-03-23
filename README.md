@@ -1,6 +1,6 @@
 ## Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+Inside the project, you'll see the following folders and files:
 
 ```text
 /
@@ -12,7 +12,7 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── assets
 │   │   └── images
 │   ├── components
-│   │   └── Header.astro
+│   │   ├── Header.astro
 │   │   └── <Stations>.astro
 │   ├── layouts
 │   │   └── Layout.astro

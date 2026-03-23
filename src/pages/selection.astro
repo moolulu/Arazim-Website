@@ -3,6 +3,8 @@ import StationPage from '../layouts/Layout.astro';
 
 import backgroundImg from '../assets/images/ground.jpg';
 
+const pageTitle = "המונים";
+
 const stations = [
   {
     type: "hero",
@@ -62,6 +64,7 @@ const stations = [
 ---
 
 <StationPage 
+  title={pageTitle}
   backgroundImage={backgroundImg}
   stations={stations} 
 />
