@@ -10,7 +10,8 @@ Inside the project, you'll see the following folders and files:
 │   └── axes
 ├── src
 │   ├── assets
-│   │   └── images
+│   │   ├── images
+│   │   └── code-snippets
 │   ├── components
 │   │   ├── Header.astro
 │   │   └── <Stations>.astro
@@ -22,6 +23,8 @@ Inside the project, you'll see the following folders and files:
 ├── .github
 │   └── workflows
 │       └── deploy.yml
+├── .gitignore
+├── .gitattributes
 └── package.json
 ```
 
@@ -35,3 +38,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+
+## Contribute
+
+To contribute, fork the repository to test your changes on a seperate domain, and open a pull request when done.

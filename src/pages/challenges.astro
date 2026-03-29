@@ -11,7 +11,7 @@ const stations = [
     title: "אתגרים",
     text: "חידות בנושאים מגוונים שארזים עוסקים בהם",
   },
-    {
+  {
     type: "standard",
     title: "דיסקליימר",
     text: "האתגרים בעמוד הם של חניכים בתוכנית ומטרתם לתת טעימה לדברים שמעניינים אותנו.\
@@ -20,6 +20,53 @@ const stations = [
     כעת, מקווים שתהנו מהמבחר :)",
     align: "center"
   },
+  {
+    type: "math",
+    title: "אלגברה לינארית",
+    align: "center",
+    text: `
+      <p>אפשר לכתוב משפט בעברית, ולשלב בתוכו נוסחה קטנה כמו \\( E = mc^2 \\) ולהמשיך את המשפט כרגיל.</p>
+      
+      <p>אם נרצה להציג משוואה גדולה וחשובה יותר, נעטוף אותה בבלוק מתמטי כדי שתהיה מיושרת לשמאל:</p>
+      
+      <div class="math-block">
+        $$ \\text{Mat}_n(\\mathbb{F}_2) $$
+      </div>
+      
+      <p>וכך אנו חוזרים לטקסט רגיל בעברית בלי לשבור את היישור של הדף, והכל נשאר קריא וברור.</p>
+    `
+  },
+  {
+    type: "math",
+    title: "אלגברה לינארית",
+    align: "center",
+    text: `
+      <p>מצאו את כל ה\\( n \\in \\mathbb{N} \\) עבורם קיימת מטריצה \\( A \\in \\text{Mat}_n(\\mathbb{F}_2) \\) כך שכל הכניסות ב \\( A^2 \\) הן \\( 1 \\).</p>
+    `
+  },
+  {
+    type: "code",
+    title: "קריפטוגרפיה",
+    text: "הנה",
+    align: "center",
+    files: [
+      {
+        label: "solution.py",
+        lang: "python",
+        path: "src/assets/code-snippets/crypto1_solve.py"
+      },
+      {
+        label: "challenge.py",
+        lang: "python",
+        path: "src/assets/code-snippets/crypto1_challenge.py"
+      },
+      {
+        label: "secret.py",
+        lang: "python",
+        path: "src/assets/code-snippets/crypto1_secret.py"
+      }
+    ]
+  }
 ];
 ---
 
