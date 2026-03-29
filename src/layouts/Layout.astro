@@ -8,11 +8,11 @@ import MathStation from '../components/MathStation.astro';
 import CodeStation from '../components/CodeStation.astro';
 
 import { getImage } from 'astro:assets';
-
-const { backgroundImage, stations, title = 'ארזים' } = Astro.props;
+const { backgroundImage, stations = [], title = 'ארזים' } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
-const faviconPath = baseUrl.endsWith('/') ? baseUrl + 'favicon.png' : baseUrl + '/favicon.png';
+const faviconPath = baseUrl.endsWith('/') ? 
+  baseUrl + 'favicon.png' : baseUrl + '/favicon.png';
 
 // 2. Intercept and optimize the massive background image
 const optimizedBg = await getImage({
@@ -20,7 +20,6 @@ const optimizedBg = await getImage({
   format: 'webp', // Converts to a fast, modern format
   width: 1920,    // Caps the maximum width to 1920px
 });
-
 const bgStyle = `background-image: url('${optimizedBg.src}')`;
 
 // Map the 'type' string from your data to the actual component
@@ -49,7 +48,7 @@ const componentMap = {
   <body>
     <Header />
 
-    <div class="progress-container">
+    <div class="progress-container" aria-hidden="true">
       <div class="progress-bar" id="myBar"></div>
     </div>
 
@@ -109,17 +108,20 @@ const componentMap = {
         right: 40px; /* Right side for Hebrew */
         top: 50%;
         transform: translateY(-50%);
-        width: 2px;
+        width: 5px;
         height: 50vh;
         background: rgba(255, 255, 255, 0.2);
         z-index: 100;
+        border-radius: 10px; /* Rounds the outer track */
+        overflow: hidden; /* Keeps the inner bar clipped cleanly */
       }
 
       .progress-bar {
         width: 100%;
+        height: 0%; /* Start at 0 */
         background: #fff;
-        height: 0%; 
-        transition: height 0.1s ease-out;
+        border-radius: 10px; /* Stays perfectly round at the bottom */
+        /* Note: No transition here, the JS handles the smoothness! */
       }
 
       @media (max-width: 768px) {
@@ -136,8 +138,13 @@ const componentMap = {
       if (scroller && progressBar) {
         scroller.addEventListener('scroll', () => {
           const scrollHeight = scroller.scrollHeight - scroller.clientHeight;
-          const scrolled = (scroller.scrollTop / scrollHeight) * 100;
-          progressBar.style.height = scrolled + "%";
+          
+          if (scrollHeight > 0) {
+            // Calculate progress as a percentage (0 to 100)
+            const scrolled = (scroller.scrollTop / scrollHeight) * 100;
+            // Apply it to height
+            progressBar.style.height = `${scrolled}%`;
+          }
         });
       }
     </script>
