@@ -1,18 +1,18 @@
 ---
 import { sitePages } from '../config.js';
+// 1. Astro Image Component is imported here
 import { Image } from 'astro:assets';
 
 const baseUrl = import.meta.env.BASE_URL;
-
 // Safely remove the trailing slash for building paths
 const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
-
 // Logo path fix
 const logoPath = cleanBaseUrl + '/logo.png';
 
 // Helper function to perfectly format navigation links
 const getNavLink = (path) => {
-  if (path === '/') return baseUrl; // If it's the home page, just use the base URL
+  if (path === '/') return baseUrl;
+  // If it's the home page, just use the base URL
   return cleanBaseUrl + (path.startsWith('/') ? path : '/' + path);
 };
 ---
@@ -32,10 +32,10 @@ const getNavLink = (path) => {
     ))}
   </nav>
 
-  <button id="menu-open" class="mobile-menu-btn">תפריט</button>
+  <button id="menu-open" class="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-overlay">תפריט</button>
 </header>
 
-<div id="mobile-overlay" class="mobile-overlay">
+<div id="mobile-overlay" class="mobile-overlay" aria-hidden="true">
   <div class="overlay-header">
     <button id="menu-close" class="close-btn">סגור ✕</button>
   </div>
@@ -65,7 +65,7 @@ const getNavLink = (path) => {
     background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
   }
 
-  /* 2. New styles for the logo and text grouping */
+  /* New styles for the logo and text grouping */
   .brand {
     display: flex;
     align-items: center;
@@ -81,11 +81,9 @@ const getNavLink = (path) => {
   }
 
   .logo-group h1 { margin: 0; font-size: 2.2rem; font-weight: 800; margin-top: -20px; }
-  .motto { font-size: 1rem;
-    opacity: 0.75; }
+  .motto { font-size: 1rem; opacity: 0.75; }
 
-  .desktop-nav { display: flex; gap: 2.3rem; align-items: center;
-  }
+  .desktop-nav { display: flex; gap: 2.3rem; align-items: center; }
   .desktop-nav a {
     color: white;
     text-decoration: none;
@@ -162,20 +160,18 @@ const getNavLink = (path) => {
 
   /* --- Mobile Layout Rules --- */
   @media (max-width: 768px) {
-    .site-header { padding: 1.5rem;
-    }
+    .site-header { padding: 1.5rem; }
     .desktop-nav { display: none; } 
-    .mobile-menu-btn { display: block;
-    } 
+    .mobile-menu-btn { display: block; } 
     
     /* Make the logo slightly smaller on phones so it fits nicely */
-    .site-logo { height: 40px;
-    }
+    .site-logo { height: 40px; }
   }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  // 3. THIS IS THE CRITICAL FIX: Changed from 'DOMContentLoaded' to 'astro:page-load'
+  document.addEventListener('astro:page-load', () => {
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
     const overlay = document.getElementById('mobile-overlay');
@@ -184,16 +180,31 @@ const getNavLink = (path) => {
     if (openBtn && closeBtn && overlay) {
       openBtn.addEventListener('click', () => {
         overlay.classList.add('is-open');
+        openBtn.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
       });
       
       closeBtn.addEventListener('click', () => {
         overlay.classList.remove('is-open');
+        openBtn.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
       });
    
       mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
           overlay.classList.remove('is-open');
+          openBtn.setAttribute('aria-expanded', 'false');
+          overlay.setAttribute('aria-hidden', 'true');
         });
+      });
+
+      // Bonus: Close menu when pressing Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+          overlay.classList.remove('is-open');
+          openBtn.setAttribute('aria-expanded', 'false');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
       });
     }
   });

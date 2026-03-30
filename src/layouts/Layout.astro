@@ -1,28 +1,30 @@
 ---
 import Header from '../components/Header.astro';
-import Station from '../components/Station.astro';
-import HeroStation from '../components/HeroStation.astro';
-import AxesStation from '../components/AxesStation.astro';
-import QuotesStation from '../components/QuotesStation.astro';
-import MathStation from '../components/MathStation.astro';
-import CodeStation from '../components/CodeStation.astro';
+
+import Station from '../components/stations/Station.astro';
+import HeroStation from '../components/stations/HeroStation.astro';
+import AxesStation from '../components/stations/AxesStation.astro';
+import QuotesStation from '../components/stations/QuotesStation.astro';
+import MathStation from '../components/stations/MathStation.astro';
+import CodeStation from '../components/stations/CodeStation.astro';
 
 import { getImage } from 'astro:assets';
+// 1. IMPORT THE UPDATED CLIENT ROUTER HERE
+import { ClientRouter } from 'astro:transitions';
+
 const { backgroundImage, stations = [], title = 'ארזים' } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
 const faviconPath = baseUrl.endsWith('/') ? 
   baseUrl + 'favicon.png' : baseUrl + '/favicon.png';
 
-// 2. Intercept and optimize the massive background image
 const optimizedBg = await getImage({
   src: backgroundImage,
-  format: 'webp', // Converts to a fast, modern format
-  width: 1920,    // Caps the maximum width to 1920px
+  format: 'webp',
+  width: 1920,
 });
 const bgStyle = `background-image: url('${optimizedBg.src}')`;
 
-// Map the 'type' string from your data to the actual component
 const componentMap = {
   standard: Station,
   hero: HeroStation,
@@ -44,6 +46,9 @@ const componentMap = {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="preload" as="image" href={optimizedBg.src} />
+    <ClientRouter />
   </head>
   <body>
     <Header />
@@ -54,14 +59,10 @@ const componentMap = {
 
     <main class="scroller" id="scroller">
       <div class="scroll-track" style={bgStyle}>
-      
         {stations.map((station) => {
-          // Resolve the component, defaulting to standard 'Station' if type is missing or unmatched
           const DynamicStation = componentMap[station.type] || Station;
-          
           return <DynamicStation data={station} />;
         })}
-        
       </div>
     </main>
 
@@ -112,15 +113,18 @@ const componentMap = {
         height: 50vh;
         background: rgba(255, 255, 255, 0.2);
         z-index: 100;
-        border-radius: 10px; /* Rounds the outer track */
-        overflow: hidden; /* Keeps the inner bar clipped cleanly */
+        border-radius: 10px;
+        /* Rounds the outer track */
+        overflow: hidden;
+        /* Keeps the inner bar clipped cleanly */
       }
 
       .progress-bar {
         width: 100%;
         height: 0%; /* Start at 0 */
         background: #fff;
-        border-radius: 10px; /* Stays perfectly round at the bottom */
+        border-radius: 10px;
+        /* Stays perfectly round at the bottom */
         /* Note: No transition here, the JS handles the smoothness! */
       }
 
@@ -132,21 +136,22 @@ const componentMap = {
     </style>
 
     <script>
-      const scroller = document.getElementById('scroller');
-      const progressBar = document.getElementById('myBar');
+      // 3. WRAP YOUR SCRIPT IN astro:page-load
+      document.addEventListener('astro:page-load', () => {
+        const scroller = document.getElementById('scroller');
+        const progressBar = document.getElementById('myBar');
 
-      if (scroller && progressBar) {
-        scroller.addEventListener('scroll', () => {
-          const scrollHeight = scroller.scrollHeight - scroller.clientHeight;
-          
-          if (scrollHeight > 0) {
-            // Calculate progress as a percentage (0 to 100)
-            const scrolled = (scroller.scrollTop / scrollHeight) * 100;
-            // Apply it to height
-            progressBar.style.height = `${scrolled}%`;
-          }
-        });
-      }
+        if (scroller && progressBar) {
+          scroller.addEventListener('scroll', () => {
+            const scrollHeight = scroller.scrollHeight - scroller.clientHeight;
+            
+            if (scrollHeight > 0) {
+              const scrolled = (scroller.scrollTop / scrollHeight) * 100;
+              progressBar.style.height = `${scrolled}%`;
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>
