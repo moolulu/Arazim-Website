@@ -4,7 +4,6 @@ const { data } = Astro.props;
 
 <section class={`station align-${data.align}`}>
   <div class="glass-card">
-    <span class="station-id">{data.id}</span>
     <h2>{data.title}</h2>
     
     {/* set:html renders the string as actual HTML, allowing <p> tags and math blocks */}

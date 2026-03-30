@@ -4,6 +4,18 @@ const { data } = Astro.props;
 
 <section class={`station align-${data.align}`}>
   <div class="glass-card">
+    <div class="meta-header">
+      <span class="station-id">{data.id}</span>
+      {data.duration && (
+        <span class="duration-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          {data.duration}
+        </span>
+      )}
+    </div>
     <h2>{data.title}</h2>
     <p>{data.text}</p>
   </div>
@@ -39,11 +51,32 @@ const { data } = Astro.props;
     color: white;
   }
 
+  /* New header layout for ID and Duration */
+  .meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
   .station-id {
     font-size: 0.9rem;
     letter-spacing: 2px;
     opacity: 0.7;
     font-weight: 600;
+  }
+
+  /* Duration pill styling */
+  .duration-badge {
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px; /* creates a pill shape */
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
   }
 
   h2 {
@@ -62,7 +95,7 @@ const { data } = Astro.props;
   /* Mobile Overrides */
   @media (max-width: 768px) {
     .station {
-      align-items: flex-end; 
+      align-items: flex-end;
       padding: 0 5% 15% 5%;
       justify-content: center; 
     }
@@ -70,6 +103,11 @@ const { data } = Astro.props;
     .glass-card {
       padding: 2rem;
       text-align: right; 
+    }
+
+    /* Stack the meta header on mobile if needed, or keep it row-based */
+    .meta-header {
+      margin-bottom: 1rem;
     }
 
     h2 { font-size: 2.5rem; }

@@ -14,19 +14,27 @@ Inside the project, you'll see the following folders and files:
 │   │   └── code-snippets
 │   ├── components
 │   │   ├── Header.astro
-│   │   └── <Stations>.astro
+│   │   └── stations
 │   ├── layouts
 │   │   └── Layout.astro
 │   ├── pages
-│   │   └── <pages>.astro
 │   └── config.js
+└── package.json
+```
+
+Alongside meta and development specific files such as:
+
+```text
+/
 ├── .github
 │   └── workflows
 │       └── deploy.yml
 ├── .gitignore
 ├── .gitattributes
-└── package.json
+├── LICENSE
+└── README.md
 ```
+
 
 ## Commands
 
