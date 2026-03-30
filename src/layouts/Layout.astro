@@ -136,12 +136,15 @@ const componentMap = {
     </style>
 
     <script>
-      // 3. WRAP YOUR SCRIPT IN astro:page-load
       document.addEventListener('astro:page-load', () => {
         const scroller = document.getElementById('scroller');
         const progressBar = document.getElementById('myBar');
 
         if (scroller && progressBar) {
+          // FIX 1: Reset scroll position to top on every page load
+          scroller.scrollTop = 0;
+          progressBar.style.height = '0%';
+
           scroller.addEventListener('scroll', () => {
             const scrollHeight = scroller.scrollHeight - scroller.clientHeight;
             

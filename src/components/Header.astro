@@ -1,7 +1,5 @@
 ---
 import { sitePages } from '../config.js';
-// 1. Astro Image Component is imported here
-import { Image } from 'astro:assets';
 
 const baseUrl = import.meta.env.BASE_URL;
 // Safely remove the trailing slash for building paths
@@ -170,7 +168,20 @@ const getNavLink = (path) => {
 </style>
 
 <script>
-  // 3. THIS IS THE CRITICAL FIX: Changed from 'DOMContentLoaded' to 'astro:page-load'
+  // FIX 2: Attach the document-level event listener OUTSIDE astro:page-load
+  // This ensures it only ever attaches once, preventing memory leaks.
+  document.addEventListener('keydown', (e) => {
+    const overlay = document.getElementById('mobile-overlay');
+    const openBtn = document.getElementById('menu-open');
+    
+    // We check if the overlay exists and is open before acting
+    if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+      overlay.classList.remove('is-open');
+      openBtn.setAttribute('aria-expanded', 'false');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+  });
+
   document.addEventListener('astro:page-load', () => {
     const openBtn = document.getElementById('menu-open');
     const closeBtn = document.getElementById('menu-close');
@@ -196,15 +207,6 @@ const getNavLink = (path) => {
           openBtn.setAttribute('aria-expanded', 'false');
           overlay.setAttribute('aria-hidden', 'true');
         });
-      });
-
-      // Bonus: Close menu when pressing Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-          overlay.classList.remove('is-open');
-          openBtn.setAttribute('aria-expanded', 'false');
-          overlay.setAttribute('aria-hidden', 'true');
-        }
       });
     }
   });
