@@ -130,9 +130,14 @@ const componentMap = {
         /* Note: No transition here, the JS handles the smoothness! */
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 1024px) {
         .progress-container {
           right: 15px;
+        }
+        
+        /* Add this to reduce text size on mobile */
+        :global(body, html) {
+          font-size: 14px; /* Adjust this value to your preferred mobile size */
         }
       }
     </style>

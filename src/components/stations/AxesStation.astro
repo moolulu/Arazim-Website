@@ -9,15 +9,71 @@ const { data } = Astro.props;
   <div class="cards-wrapper">
     {data.cards?.map((card) => (
       <div class="card">
-        <div class="icon-container">
-          <img src={card.icon} alt={card.title} />
+        <div class="card-header">
+          <div class="icon-container">
+            <img src={card.icon} alt={card.title} />
+          </div>
+          <h3 class="card-title">{card.title}</h3>
         </div>
-        <h3 class="card-title">{card.title}</h3>
-        <p class="card-description">{card.description}</p>
+        
+        <div class="card-body">
+          <p class="card-description">{card.description}</p>
+        </div>
       </div>
     ))}
   </div>
 </section>
+
+<script>
+  function setupAccordion() {
+    const headers = document.querySelectorAll('.card-header');
+    let isAnimating = false; // Prevents clicking rapidly and breaking the animation
+    
+    headers.forEach(header => {
+      header.onclick = (e) => {
+        if (isAnimating) return; // Ignore taps if an animation is currently running
+
+        const clickedCard = e.currentTarget.closest('.card');
+        const isCurrentlyExpanded = clickedCard.classList.contains('is-expanded');
+        const currentlyOpenCard = document.querySelector('.card.is-expanded');
+        
+        if (currentlyOpenCard && currentlyOpenCard !== clickedCard) {
+          // 1. If ANOTHER card is open, close it first
+          isAnimating = true;
+          currentlyOpenCard.classList.remove('is-expanded');
+          
+          // 2. Wait for the close animation to finish, then open the new one
+          setTimeout(() => {
+            clickedCard.classList.add('is-expanded');
+            isAnimating = false;
+            
+            // Smoothly scroll the newly opened card into view so it isn't cut off
+            setTimeout(() => {
+              clickedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 50);
+            
+          }, 700); 
+
+        } else if (!isCurrentlyExpanded) {
+          // If NO cards are open, just open the clicked one immediately
+          clickedCard.classList.add('is-expanded');
+          
+          // Smoothly scroll it into view
+          setTimeout(() => {
+            clickedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 50);
+
+        } else {
+          // If we tapped the already-open card, just close it
+          clickedCard.classList.remove('is-expanded');
+        }
+      };
+    });
+  }
+
+  setupAccordion();
+  document.addEventListener('astro:page-load', setupAccordion);
+</script>
 
 <style>
   .station-container {
@@ -26,7 +82,6 @@ const { data } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 2rem 4rem;
     color: #fff;
     box-sizing: border-box;
@@ -44,6 +99,7 @@ const { data } = Astro.props;
     gap: 2rem;
     width: 100%;
     max-width: 1200px;
+    margin: auto 0; 
   }
 
   .card {
@@ -53,12 +109,20 @@ const { data } = Astro.props;
     padding: 2rem;
     text-align: center;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
   }
 
-  .card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
+  @media (min-width: 861px) {
+    .card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .icon-container {
@@ -70,13 +134,10 @@ const { data } = Astro.props;
     justify-content: center;
   }
 
-  /* Targets the new image tag */
   .icon-container img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Optional: If your SVGs are black and you need them to be white to show up on the dark background, uncomment the line below */
-    /* filter: invert(1); */
   }
 
   .card-title {
@@ -90,17 +151,76 @@ const { data } = Astro.props;
     line-height: 1.6;
     opacity: 0.9;
     font-weight: 300;
+    margin: 0; 
   }
 
+  /* --- Mobile Layout --- */
   @media (max-width: 860px) {
     .cards-wrapper {
       grid-template-columns: 1fr;
     }
+    
     .station-container {
       height: auto;
       min-height: 100dvh;
-      padding-top: 5rem;
+      padding-top: 4rem;
       padding-bottom: 5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .station-main-title {
+      display: none;
+    }
+
+    .card {
+      padding: 1.5rem;
+      -webkit-tap-highlight-color: transparent; 
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NEW: Highlights the card when it is expanded, matching the desktop hover effect */
+    .card.is-expanded {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .card-header {
+      flex-direction: row;
+      align-items: center; 
+      justify-content: center; 
+      gap: 1.2rem;
+      cursor: pointer; 
+    }
+
+    .icon-container {
+      width: 48px;
+      height: 48px;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      margin: 0; 
+      font-size: 1.5rem; 
+      line-height: 1.2;
+    }
+
+    .card-description {
+      text-align: right; 
+    }
+
+    .card-body {
+      max-height: 0; 
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease-in-out, margin-top 0.6s ease-in-out, margin-bottom 0.6s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .card.is-expanded .card-body {
+      max-height: 500px; 
+      margin-top: 1rem; 
+      opacity: 1;
     }
   }
 </style>
