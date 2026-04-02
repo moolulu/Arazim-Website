@@ -96,6 +96,7 @@ const quotes = data.quotes || [];
     place-items: center;
     touch-action: pan-y; 
     overscroll-behavior-x: none; 
+    padding: 0 4rem;
   }
 
   .quote-slide {
@@ -140,11 +141,40 @@ const quotes = data.quotes || [];
     opacity: 0.6;
     transition: opacity 0.2s, transform 0.2s;
     padding: 0 15px; /* ENLARGED: Gives the arrows more clickable area and space */
+
+    
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    outline: none;
   }
 
-  .nav-btn:hover {
+  .right-btn {
+    right: 3%; /* Anchors the right arrow to the edge of the station */
+  }
+
+  .left-btn {
+    left: 3%; /* Anchors the left arrow to the edge of the station */
+  }
+
+  
+  @media (hover: hover) {
+    .nav-btn:hover {
+      opacity: 1;
+      /* Must include translateY(-50%) to keep it centered while scaling */
+      transform: translateY(-50%) scale(1.1);
+    }
+  }
+  
+
+  .nav-btn:active {
     opacity: 1;
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(0.95);
   }
 
   /* Pagination Dots */
@@ -173,14 +203,17 @@ const quotes = data.quotes || [];
   /* Mobile Overrides */
   @media (max-width: 768px) {
     .station {
-      align-items: flex-end;
-      padding: 0 5% 15% 5%;
+      
+      padding: 0 5%;
       justify-content: center; 
     }
     .glass-card { padding: 2rem; }
     .quote-text { font-size: 1.2rem; }
     .nav-btn { font-size: 2rem; padding: 0 10px; }
     .carousel-wrapper { gap: 1rem; }
+    .quotes-track {
+      padding: 0 2rem; 
+    }
   }
 </style>
 
