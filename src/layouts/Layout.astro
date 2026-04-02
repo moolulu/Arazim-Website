@@ -111,7 +111,7 @@ const componentMap = {
         right: 40px; /* Right side for Hebrew */
         top: 50%;
         transform: translateY(-50%);
-        width: 5px;
+        width: 6px;
         height: 50vh;
         background: rgba(255, 255, 255, 0.2);
         z-index: 100;
@@ -132,7 +132,8 @@ const componentMap = {
 
       @media (max-width: 1024px) {
         .progress-container {
-          right: 15px;
+          right: 8px; /* Pushed further to the right edge (previously 15px) */
+          width: 4px; /* Overrides the desktop 5px width to make it slimmer */
         }
         
         /* Add this to reduce text size on mobile */

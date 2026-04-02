@@ -54,7 +54,7 @@ const getNavLink = (path) => {
     display: flex;
     justify-content: space-between;
     align-items: center; /* Changed to center for better alignment with the button */
-    padding: 1.8rem 1.8rem 1rem 2.4rem;
+    padding: 1.8rem 1.8rem 1rem 3rem;
     box-sizing: border-box;
     z-index: 1000;
     color: white;
@@ -87,6 +87,7 @@ const getNavLink = (path) => {
     display: flex; 
     gap: 2.3rem; 
     align-items: center;
+    margin-top: -48px;
   }
   .desktop-nav a {
     color: white;
@@ -116,7 +117,7 @@ const getNavLink = (path) => {
     left: 0;
     width: 100%;
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 90, 30, 0.65);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 2000;
@@ -181,6 +182,7 @@ const getNavLink = (path) => {
     /* 2. Pin BOTH buttons to the exact same viewport coordinates */
     .mobile-menu-btn, .close-btn {
       position: fixed;
+      font-size: 1.4rem;
       top: 1.5rem;   /* Distance from top of screen */
       left: 1.2rem;  /* Distance from left of screen */
       width: 80px;   /* Force exact same width */
@@ -196,7 +198,7 @@ const getNavLink = (path) => {
     .site-logo { height: 75px; }
     
     .logo-group h1 { 
-      font-size: 2rem; 
+      font-size: 2.4rem; 
       margin-top: -10px; 
       margin-right: -7px; 
     }
