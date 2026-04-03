@@ -96,8 +96,8 @@ const processedFiles = (data.files || []).map((fileItem, index) => {
 
   /* --- CODE WIDGET STYLES --- */
   .code-widget {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     overflow: hidden; 
     position: relative;
@@ -105,8 +105,8 @@ const processedFiles = (data.files || []).map((fileItem, index) => {
 
   .tab-header {
     display: flex;
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     overflow-x: auto; 
     scrollbar-width: none; /* Hide scrollbar for tabs */
   }
@@ -162,6 +162,7 @@ const processedFiles = (data.files || []).map((fileItem, index) => {
     font-size: 0.95rem;
     line-height: 1.5;
     font-family: 'Courier New', Courier, monospace;
+    white-space: pre !important;
   }
 
   @media (max-width: 768px) {

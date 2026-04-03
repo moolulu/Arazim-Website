@@ -29,14 +29,21 @@ const getNavLink = (path) => {
       <a href={getNavLink(page.path)}>{page.title}</a>
     ))}
   </nav>
-
-  <button id="menu-open" class="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-overlay">תפריט</button>
 </header>
 
-<div id="mobile-overlay" class="mobile-overlay" aria-hidden="true">
-  <div class="overlay-header">
-    <button id="menu-close" class="close-btn">סגור ✕</button>
+<button id="menu-toggle" class="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-overlay">
+  <div class="menu-text-wrapper">
+    <span class="text-open">תפריט</span>
+    <span class="text-close">סגור</span>
   </div>
+  <div class="hamburger">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </div>
+</button>
+
+<div id="mobile-overlay" class="mobile-overlay" aria-hidden="true">
   <nav class="mobile-nav-links">
     {sitePages.map(page => (
       <a href={getNavLink(page.path)} class="mobile-link">{page.title}</a>
@@ -53,7 +60,7 @@ const getNavLink = (path) => {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Changed to center for better alignment with the button */
+    align-items: center;
     padding: 1.8rem 1.8rem 1rem 3rem;
     box-sizing: border-box;
     z-index: 1000;
@@ -81,14 +88,19 @@ const getNavLink = (path) => {
     font-weight: 800; 
     margin-top: -20px;
   }
-  .motto { font-size: 1rem; opacity: 0.75; }
+  
+  .motto { 
+    font-size: 1rem; 
+    opacity: 0.75; 
+  }
 
   .desktop-nav { 
     display: flex; 
-    gap: 2.3rem; 
+    gap: 2.3rem;
     align-items: center;
     margin-top: -48px;
   }
+  
   .desktop-nav a {
     color: white;
     text-decoration: none;
@@ -96,8 +108,12 @@ const getNavLink = (path) => {
     font-size: 1.2rem;
     transition: opacity 0.3s;
   }
-  .desktop-nav a:hover { opacity: 0.6; }
+  
+  .desktop-nav a:hover { 
+    opacity: 0.6; 
+  }
 
+  /* --- Base Button Styles --- */
   .mobile-menu-btn {
     display: none;
     background: transparent;
@@ -107,7 +123,73 @@ const getNavLink = (path) => {
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    padding: 0.5rem; /* Standardized touch target */
+    padding: 0.5rem;
+    align-items: center; 
+    gap: 0.6rem; 
+    z-index: 2005; 
+  }
+
+  /* --- Smooth Text Transition Styles --- */
+  .menu-text-wrapper {
+    position: relative;
+    width: 48px;
+    height: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-open, .text-close {
+    position: absolute;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .text-open {
+    opacity: 1;
+    transform: translateY(-1px); 
+  }
+
+  .text-close {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .mobile-menu-btn.is-open .text-open {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  .mobile-menu-btn.is-open .text-close {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  /* --- Hamburger Stripes & Animation --- */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+  }
+
+  .hamburger .line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .mobile-menu-btn.is-open .hamburger .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-menu-btn.is-open .hamburger .line:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-btn.is-open .hamburger .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   /* --- Mobile Overlay Styles --- */
@@ -117,7 +199,7 @@ const getNavLink = (path) => {
     left: 0;
     width: 100%;
     height: 100dvh;
-    background: rgba(0, 90, 30, 0.65);
+    background: rgba(0, 80, 25, 0.65);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 2000;
@@ -131,22 +213,6 @@ const getNavLink = (path) => {
   .mobile-overlay.is-open {
     opacity: 1;
     pointer-events: auto;
-  }
-
-  .overlay-header {
-    display: flex;
-    justify-content: flex-end; /* In RTL, this naturally pushes the close button to the left */
-    padding: 1.5rem 2.2rem; /* Adjusted to match your desired mobile button placement naturally */
-  }
-
-  .close-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    font-family: inherit;
-    cursor: pointer;
-    padding: 0.5rem;
   }
 
   .mobile-nav-links {
@@ -168,84 +234,76 @@ const getNavLink = (path) => {
   /* --- Mobile Layout Rules --- */
   @media (max-width: 1024px) { 
     .site-header { 
-      padding: 0.6rem 0.6rem 1rem 1rem; 
+      padding: 0.6rem 0.6rem 1rem 1rem;
     }
 
-    .desktop-nav { display: none; } 
+    .desktop-nav { 
+      display: none; 
+    } 
     
-    /* 1. Remove the overlay header's structural padding so it doesn't get in the way */
-    .overlay-header {
-      padding: 0;
-      height: 0;
-    }
-
-    /* 2. Pin BOTH buttons to the exact same viewport coordinates */
-    .mobile-menu-btn, .close-btn {
+    .mobile-menu-btn {
       position: fixed;
       font-size: 1.4rem;
-      top: 1.5rem;   /* Distance from top of screen */
-      left: 1.2rem;  /* Distance from left of screen */
-      width: 80px;   /* Force exact same width */
-      height: 40px;  /* Force exact same height */
+      top: 2.3rem;   /* Adjust this to move it perfectly level with your logo */
+      left: 1.5rem;  /* Keeps it pinned to the left side */
       margin: 0;
       padding: 0;
       display: flex;
-      align-items: center;
-      justify-content: center; /* This perfectly centers the text regardless of word length */
-      z-index: 2005; /* Ensures both stay above the overlay */
     }
 
-    .site-logo { height: 75px; }
+    .site-logo { 
+      height: 75px;
+    }
     
     .logo-group h1 { 
-      font-size: 2.4rem; 
+      font-size: 2.4rem;
       margin-top: -10px; 
       margin-right: -7px; 
     }
-    .motto { display: none; }
+    
+    .motto { 
+      display: none;
+    }
   }
 </style>
 
 <script>
-  // FIX 2: Attach the document-level event listener OUTSIDE astro:page-load
-  // This ensures it only ever attaches once, preventing memory leaks.
+  // Helper function to close the menu
+  const closeMenu = (overlay, toggleBtn) => {
+    overlay.classList.remove('is-open');
+    toggleBtn.classList.remove('is-open'); 
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    overlay.setAttribute('aria-hidden', 'true');
+  };
+
   document.addEventListener('keydown', (e) => {
     const overlay = document.getElementById('mobile-overlay');
-    const openBtn = document.getElementById('menu-open');
+    const toggleBtn = document.getElementById('menu-toggle');
     
-    // We check if the overlay exists and is open before acting
     if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
-      overlay.classList.remove('is-open');
-      openBtn.setAttribute('aria-expanded', 'false');
-      overlay.setAttribute('aria-hidden', 'true');
+      closeMenu(overlay, toggleBtn);
     }
   });
 
   document.addEventListener('astro:page-load', () => {
-    const openBtn = document.getElementById('menu-open');
-    const closeBtn = document.getElementById('menu-close');
+    const toggleBtn = document.getElementById('menu-toggle');
     const overlay = document.getElementById('mobile-overlay');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    if (openBtn && closeBtn && overlay) {
-      openBtn.addEventListener('click', () => {
-        overlay.classList.add('is-open');
-        openBtn.setAttribute('aria-expanded', 'true');
-        overlay.setAttribute('aria-hidden', 'false');
+    if (toggleBtn && overlay) {
+      toggleBtn.addEventListener('click', () => {
+        if (overlay.classList.contains('is-open')) {
+          closeMenu(overlay, toggleBtn);
+        } else {
+          overlay.classList.add('is-open');
+          toggleBtn.classList.add('is-open'); 
+          toggleBtn.setAttribute('aria-expanded', 'true');
+          overlay.setAttribute('aria-hidden', 'false');
+        }
       });
       
-      closeBtn.addEventListener('click', () => {
-        overlay.classList.remove('is-open');
-        openBtn.setAttribute('aria-expanded', 'false');
-        overlay.setAttribute('aria-hidden', 'true');
-      });
-   
       mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          overlay.classList.remove('is-open');
-          openBtn.setAttribute('aria-expanded', 'false');
-          overlay.setAttribute('aria-hidden', 'true');
-        });
+        link.addEventListener('click', () => closeMenu(overlay, toggleBtn));
       });
     }
   });
