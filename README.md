@@ -38,7 +38,7 @@ Alongside meta and development specific files such as:
 
 ## Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are need to be ran at the root of the project:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -46,6 +46,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+
+To test mobile devices, append the `-- --host` flag to `dev` and `preview` commands.
 
 ## Contribute
 
