@@ -1,6 +1,5 @@
 ---
 import StationPage from '../layouts/Layout.astro';
-
 import backgroundImg from '../assets/images/ground.jpg';
 
 const pageTitle = "המונים";
@@ -8,42 +7,35 @@ const pageTitle = "המונים";
 const stations = [
   {
     type: "hero",
-    id: "00",
     title: "המיונים",
     text: "השלבים השונים במיון וקבלה לתוכנית",
   },
   {
-    id: "01",
     title: "יום מיונים מרוכז של שחקים",
     text: "מלש\"בים שחיל המודיעין סובר שמתאימים למסלול שחקים ייקבלו זימון ליום מיונים עד הצהריים.",
     align: "start"
   },
   {
-    id: "02",
     title: "סדנת ארזים",
     text: "מי שיימצאו מתאימים לתוכנית ארזים, יקבלו זימון לסדנה האורכת יום שלם וכוללת חשיפה למסלול וכן מבחנים. ארזים ממיינים גם מלש\"בים עם פרופיל קרבי.",
     align: "end"
   },
   {
-    id: "03",
     title: "ראיון מקצועי",
     text: "על מנת להמשיך ולבדוק התאמה, ייארך ראיון קצר האורך כשעה.",
     align: "start"
   },
   {
-    id: "04",
     title: "ראיון אישיותי",
     text: "מילים",
     align: "center"
   },
   {
-    id: "05",
     title: "ראיון פסיכולוגי",
     text: "מילים",
     align: "start"
   },
   {
-    id: "06",
     title: "סיווג בטחוני",
     text: "מילים",
     align: "end"
@@ -56,9 +48,14 @@ const stations = [
     align: "center"
   },
   {
+    type: "link",
     title: "קבלה לאוניברסיטת תל אביב",
     text: "יש להירשם כסטודנטים מן המניין לתואר דו-חוגי במתמטיקה ומדעי המחשב.",
-    align: "center"
+    align: "center",
+    links: [
+      { text: "מסלול מדעי המחשב", url: "https://go.tau.ac.il/he/exact/ba/computer" },
+      { text: "מסלול מתמטיקה", url: "https://go.tau.ac.il/he/exact/ba/math" }
+    ]
   },
 ];
 ---

@@ -1,6 +1,5 @@
 ---
 import StationPage from '../layouts/Layout.astro';
-
 import backgroundImg from '../assets/images/mountain.jpg';
 
 const pageTitle = "שאלות ותשובות";
@@ -8,7 +7,6 @@ const pageTitle = "שאלות ותשובות";
 const stations = [
   {
     type: "hero",
-    id: "01",
     title: "שאלות ותשובות",
     text: "תשובות לשאלות הנפוצות ביותר",
   },
@@ -17,31 +15,52 @@ const stations = [
     title: "מה אם כבר התחלתי תואר?",
     text: "ניתן להגיע עם פטורים לתוכנית במידה ועשיתם עד שלושה רבעים מהתואר.\
     במידה וסיימתם את התואר במלואו, ניתן להתמיין לארזים 2.",
-    align: "start" // Will anchor to the Right
+    align: "start"
+  },
+  {
+    type: "standard",
+    title: "האם יש דרישות פרופיל רפואי?",
+    text: "לפרופיל אין השפעה על המיונים והקבלה לתוכנית.\
+    בכיוון הראשון, ארזים ממיינים מלש\"בים עם פרופיל קרבי ואין חסם עליון על הפרופיל.\
+    בכיוון השני, המסלול מותאם לבעלי פרופיל עורפי ואין חסם תחתון על הפרופיל.",
+    align: "start"
   },
   {
     type: "standard",
     title: "מתי מקבלים תשובות קבלה?",
     text: "לרוב בסביבות יוני יש תשובות סופיות. צוות האיתור יפנה אליכם במידה והתקבלתם אז אין צורך לדאוג.",
-    align: "start" // Will anchor to the Right
+    align: "start"
+  },
+  {
+    type: "standard",
+    title: "מה אם אני רוצה לדחות שירות?",
+    text: "במידה ודוחים שירות, נדרשים לחזור שוב על הליך המיון.",
+    align: "start"
+  },
+  {
+    type: "standard",
+    title: "היכן מתגוררים החניכים?",
+    text: "חניכי התוכנית מתגוררים במעונות האוניברסיטה.\
+    ההתגוררות במעונות אינה חובה אך מומלצת מאוד גם למי שגר בקרבת האוניברסיטה, בשביל ההוויה החברתית והפעילויות שעושים החניכים יחד, ועקב אינטנסיביות התוכנית.",
+    align: "start"
   },
   {
     type: "standard",
     title: "המיונים לארזים מקפיאים מיונים אחרים?",
     text: "לא, המיונים לארזים לא מקפיאים מיונים אחרים.",
-    align: "start" // Will anchor to the Right
+    align: "start"
   },
   {
     type: "standard",
     title: "מה אורך המסלול?",
     text: "שנתיים של תואר, שנתיים שירות סדיר, שלוש שנים קבע.",
-    align: "start" // Will anchor to the Right
+    align: "start"
   },
   {
     type: "standard",
     title: "כמה מתקבלים לארזים כל מחזור?",
     text: "לתוכנית מתקבלים בין 10 ל20 חניכים מידי שנה.",
-    align: "start" // Will anchor to the Right
+    align: "start"
   },
 ];
 ---

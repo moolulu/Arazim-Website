@@ -4,10 +4,13 @@ import Header from '../components/Header.astro';
 import Station from '../components/stations/Station.astro';
 import StepStation from '../components/stations/StepStation.astro';
 import HeroStation from '../components/stations/HeroStation.astro';
-import AxesStation from '../components/stations/AxesStation.astro';
+import CardsStation from '../components/stations/CardsStation.astro';
 import QuotesStation from '../components/stations/QuotesStation.astro';
 import MathStation from '../components/stations/MathStation.astro';
 import CodeStation from '../components/stations/CodeStation.astro';
+import CodeStation from '../components/stations/CodeStation.astro';
+import LinkStation from '../components/stations/LinkStation.astro';
+
 
 import { getImage } from 'astro:assets';
 // 1. IMPORT THE UPDATED CLIENT ROUTER HERE
@@ -29,11 +32,12 @@ const bgStyle = `background-image: url('${optimizedBg.src}')`;
 const componentMap = {
   standard: Station,
   hero: HeroStation,
-  axes: AxesStation,
+  cards: CardsStation,
   quotes: QuotesStation,
   math: MathStation,
   code: CodeStation,
   step: StepStation,
+  link: LinkStation,
 };
 ---
 

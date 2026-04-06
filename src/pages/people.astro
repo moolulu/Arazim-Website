@@ -1,9 +1,11 @@
 ---
 import StationPage from '../layouts/Layout.astro';
-
 import backgroundImg from '../assets/images/parrot.jpg';
 
 const pageTitle = "האנשים";
+
+const baseUrl = import.meta.env.BASE_URL;
+const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
 const stations = [
   {
@@ -26,8 +28,29 @@ const stations = [
     מילים מילים מילים מילים מילים מילים מילים מילים\
        מילים מילים מילים מילים מילים מילים מילים מילים", author: "בוגר דברן במיוחד" },
     { text: "🥀 וכו'", author: "בוגר אנונימי" }
-  ]
-}
+    ]
+  },
+  {
+    type: "cards",
+    "mainTitle": "אחרי הצבא",
+    "cards": [
+      {
+        "icon": cleanBaseUrl + "/jobs/hitech.svg", 
+        "title": "הייטק",
+        "description": "בין אם בחברות המובילות ובין אם כחלק מסטרטאפ, בוגרי ארזים מוכיחים את עצמם כנכסים בתחומי המחקר והפיתוח."
+      },
+      {
+        "icon": cleanBaseUrl + "/jobs/academia.svg", 
+        "title": "אקדמיה",
+        "description": "הרבה בוגרים ממשיכים באקדמיה, בין אם לתארים מתקדמים במתמטיקה או מדעי המחשב, ובין אם בהסבה לתחומים אחרים כמו רפואה או מדעי המוח."
+      },
+      {
+        "icon": cleanBaseUrl + "/jobs/army.svg", 
+        "title": "קבע",
+        "description": "יש בוגרים שממשיכים בצבא בצמרת הפיקודית או כמוקדי ידע בתחומם, וממשיכים לתרום רבות לביטחון המדינה."
+      }
+    ]
+  },
 ];
 ---
 
